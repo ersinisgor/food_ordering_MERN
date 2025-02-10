@@ -51,6 +51,31 @@ const DetailPage = () => {
     });
   };
 
+  const removeFromCart = (cartItem: CartItem) => {
+    setCartItems(prevCartItems => {
+      const existingCartItem = prevCartItems.find(
+        item => item._id === cartItem._id
+      );
+
+      if (existingCartItem) {
+        const updatedQuantity = existingCartItem.quantity - 1;
+
+        if (updatedQuantity > 0) {
+          return prevCartItems.map(item =>
+            item._id === cartItem._id
+              ? { ...item, quantity: updatedQuantity }
+              : item
+          );
+        } else {
+          return prevCartItems.filter(item => item._id !== cartItem._id);
+        }
+      }
+
+      // If the item doesn't exist, return the previous cart items
+      return prevCartItems;
+    });
+  };
+
   if (isLoading || !restaurant) {
     return "Loading...";
   }
@@ -77,7 +102,11 @@ const DetailPage = () => {
 
         <div>
           <Card>
-            <OrderSummary restaurant={restaurant} cartItems={cartItems} />
+            <OrderSummary
+              restaurant={restaurant}
+              cartItems={cartItems}
+              removeFromCart={removeFromCart}
+            />
           </Card>
         </div>
       </div>
