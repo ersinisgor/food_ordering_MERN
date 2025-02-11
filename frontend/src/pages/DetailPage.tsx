@@ -20,7 +20,10 @@ const DetailPage = () => {
   const { restaurantId } = useParams();
   const { restaurant, isLoading } = useGetRestaurant(restaurantId);
 
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const storedCartItems = sessionStorage.getItem(`cartItems-${restaurantId}`);
+    return storedCartItems ? JSON.parse(storedCartItems) : [];
+  });
 
   const addToCart = (menuItem: MenuItemType) => {
     setCartItems(prevCartItems => {
@@ -48,6 +51,11 @@ const DetailPage = () => {
         ];
       }
 
+      sessionStorage.setItem(
+        `cartItems-${restaurantId}`,
+        JSON.stringify(updatedCartItems)
+      );
+
       return updatedCartItems;
     });
   };
@@ -58,18 +66,29 @@ const DetailPage = () => {
         item => item._id === cartItem._id
       );
 
+      let updatedCartItems;
+
       if (existingCartItem) {
         const updatedQuantity = existingCartItem.quantity - 1;
 
         if (updatedQuantity > 0) {
-          return prevCartItems.map(item =>
+          updatedCartItems = prevCartItems.map(item =>
             item._id === cartItem._id
               ? { ...item, quantity: updatedQuantity }
               : item
           );
         } else {
-          return prevCartItems.filter(item => item._id !== cartItem._id);
+          updatedCartItems = prevCartItems.filter(
+            item => item._id !== cartItem._id
+          );
         }
+
+        sessionStorage.setItem(
+          `cartItems-${restaurantId}`,
+          JSON.stringify(updatedCartItems)
+        );
+
+        return updatedCartItems;
       }
 
       // If the item doesn't exist, return the previous cart items
