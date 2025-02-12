@@ -49,7 +49,7 @@ const createCheckoutSession = async (req: Request, res: Response) => {
 
     const session = await createSession(
       lineItems,
-      "TEST_ORDER_ID",
+      newOrder._id.toString(),
       restaurant.deliveryPrice,
       restaurant._id.toString()
     );
@@ -59,6 +59,7 @@ const createCheckoutSession = async (req: Request, res: Response) => {
       return;
     }
 
+    await newOrder.save();
     res.json({ url: session.url });
   } catch (error: any) {
     console.log(error);
