@@ -97,8 +97,8 @@ Restaurant owners can:
 - **Restaurants**
 
   - `GET /api/restaurants`: Get all restaurants.
-  - `GET /api/restaurants/`:id: Get a specific restaurant.
-  - `POST /api/restaurants`: Create a new restaurant (admin-only).
+  - `GET /api/restaurants/:id`: Get a specific restaurant.
+  - `POST /api/restaurants`: Create a new restaurant.
 
 - **Orders**
 
