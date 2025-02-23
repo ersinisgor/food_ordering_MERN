@@ -2,6 +2,21 @@
 
 A full-stack food ordering application built with the **MERN stack** (MongoDB, Express.js, React, Node.js). This project allows users to browse restaurants, place orders, and manage their profiles, while restaurant owners can manage their menus and orders.
 
+## 📖 Table of Contents
+
+- [Features](#-features)
+  - [User Features](#user-features)
+  - [Restaurant Owner Features](#restaurant-owner-features)
+  - [General Features](#general-features)
+- [How the Website Works](#️-how-the-website-works)
+- [Technologies Used](#️-technologies-used)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+  - [Other Tools](#other-tools)
+- [API Documentation](#-api-documentation)
+- [User Login](#-user-login)
+- [Fake Restaurants](#-fake-restaurants)
+
 ## 🌟 Features
 
 ### **User Features**
@@ -110,3 +125,23 @@ Restaurant owners can:
 
   - `GET /api/users/:id`: Get user details.
   - `PUT /api/users/:id`: Update user details.
+
+## 👤 User Login
+
+To test the application, you can use the following demo account:
+
+**Email address:** `test@mail.com`
+
+**Password:** `Test@123`
+
+Alternatively, you can create your own account using the **Sign Up** feature.
+
+## 📍 Fake Restaurants
+
+The application includes fake restaurants for testing purposes. These restaurants are located in the following cities:
+
+- **London**
+
+- **Manchester**
+
+To explore the restaurants, please search in these cities.
